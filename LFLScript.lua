@@ -13,9 +13,13 @@ local HitboxTab = main:NewTab("Hitbox")
 local OtherTab = main:NewTab("Other")
 
 local TogUI = OtherTab:NewSection("Toggle UI")
-TogUI:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()
+TogUI:NewKeybind("Toggle UI", "Toggles the UI", Enum.KeyCode.F, function()
 	Library:ToggleUI()
 end)
+
+local credstab = main:NewTab("Credits")
+credstab:NewSection("Credits")
+credstab:NewLabel("Made by ! luke#8318")
 
 local HBSection = HitboxTab:NewSection("Hitbox Editor")
 
