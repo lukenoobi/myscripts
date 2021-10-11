@@ -1,5 +1,6 @@
 local rs = game:GetService("RunService")
 local uis = game:GetService("UserInputService")
+local myself = game:GetService("Players").LocalPlayer
 
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
@@ -7,9 +8,10 @@ local oghbx = 2
 local oghby = 4.75
 local oghbz = 2
 
-local main = Library.CreateLib("LFL Fucker")
+local main = Library.CreateLib("LFL Fucker v1.01")
 
 local HitboxTab = main:NewTab("Hitbox")
+local MiscTab = main:NewTab("Miscellaneous")
 local OtherTab = main:NewTab("Other")
 
 local TogUI = OtherTab:NewSection("Toggle UI")
@@ -52,9 +54,9 @@ HBSection:NewToggle("Enable", "Enables Hitbox Editor", function(state)
 			for i,v in pairs(editList) do
 				v:Remove()
 			end
-			
+
 			ApplyHB(HBx,HBy,HBz,HBt)
-			end)
+		end)
 	else
 		editLoop:Disconnect()
 		for i,v in pairs(editList) do
@@ -68,3 +70,36 @@ HBSection:NewSlider("Hitbox Size X", "", 25, 0, function(state) HBx = state end)
 HBSection:NewSlider("Hitbox Size Y", "", 25, 0, function(state) HBy = state end)
 HBSection:NewSlider("Hitbox Size Z", "", 25, 0, function(state) HBz = state end)
 HBSection:NewSlider("Transparency", "", 100, 0, function(s) HBt = s/100 end)
+
+local hum = myself.Character.Humanoid
+local run = false
+local MiscSection = MiscTab:NewSection("Miscellaneous")
+MiscSection:NewToggle("Enable Infinite Stamina", "Requires a different keybind.", function(state) run = state end)
+--[[]]
+MiscSection:NewKeybind("Sprint Key", "Key to sprint with infinite stam on.", Enum.KeyCode.Q, function()
+	if run then
+		if myself.Character then
+			if hum.WalkSpeed == 22 then
+				hum.WalkSpeed = 17
+			else
+				hum.WalkSpeed = 22
+			end
+		end
+	end
+end)
+
+--[[
+##########################################################TO DO###########################################################
+
+inf stam (21.7, 17) done with val 22 to 17
+instasack keybind
+mag
+keybind presets for hb
+qb aimbot(unlikely)
+color changer for hb
+theme changer
+jp slider
+key system w/ userids
+ver 1.01
+					
+]]
