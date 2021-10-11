@@ -18,8 +18,8 @@ TogUI:NewKeybind("Toggle UI", "Toggles the UI", Enum.KeyCode.F, function()
 end)
 
 local credstab = main:NewTab("Credits")
-credstab:NewSection("Credits")
-credstab:NewLabel("Made by ! luke#8318")
+local credsec = credstab:NewSection("Credits")
+credsec:NewLabel("Made by ! luke#8318")
 
 local HBSection = HitboxTab:NewSection("Hitbox Editor")
 
