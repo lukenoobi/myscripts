@@ -8,7 +8,7 @@ local oghbx = 2
 local oghby = 4.75
 local oghbz = 2
 
-local main = Library.CreateLib("LFL Fucker v1.01")
+local main = Library.CreateLib("LFL Fucker v1.02")
 
 local HitboxTab = main:NewTab("Hitbox")
 local MiscTab = main:NewTab("Miscellaneous")
@@ -41,11 +41,28 @@ function ApplyHB(x,y,z,t)
 	end
 end
 
+function ApplyLocalHB(x,y,z,t)
+	local hb = myself.Character:FindFirstChild('Hitbox')
+	local hbsize1 = x
+	local hbsize2 = y
+	local hbsize3 = z
+	
+	if hb then
+		hb.Size = Vector3.new(hbsize1, hbsize2, hbsize3)
+		hb.Transparency = t
+	end
+end
+
 local editList = {}
 local HBx = 2
 local HBy = 4.75
 local HBz = 2
 local HBt = 0.5
+
+local HBx1 = 2
+local HBy1 = 4.75
+local HBz1 = 2
+local HBt1 = 0.5
 
 HBSection:NewToggle("Enable", "Enables Hitbox Editor", function(state)
 	if state then
@@ -66,10 +83,40 @@ HBSection:NewToggle("Enable", "Enables Hitbox Editor", function(state)
 	end
 end)
 
+
+
 HBSection:NewSlider("Hitbox Size X", "", 25, 0, function(state) HBx = state end)
 HBSection:NewSlider("Hitbox Size Y", "", 25, 0, function(state) HBy = state end)
 HBSection:NewSlider("Hitbox Size Z", "", 25, 0, function(state) HBz = state end)
 HBSection:NewSlider("Transparency", "", 100, 0, function(s) HBt = s/100 end)
+
+local HBSection = HitboxTab:NewSection("Local Hitbox Editor")
+local localList = {}
+
+HBSection:NewToggle("Enable Local", "Enables Local Hitbox Editor", function(state)
+	if state then
+		localList = {}
+		localLoop = rs.RenderStepped:Connect(function()
+			for i,v in pairs(localList) do
+				v:Remove()
+			end
+
+			ApplyLocalHB(HBx1,HBy1,HBz1,HBt1)
+		end)
+	else
+		localLoop:Disconnect()
+		for i,v in pairs(localList) do
+			v:Remove()
+		end
+		ApplyLocalHB(2,4.75,2,1)
+	end
+end)
+
+
+HBSection:NewSlider("Local Hitbox X", "", 25, 0, function(state) HBx1 = state end)
+HBSection:NewSlider("Local Hitbox Y", "", 25, 0, function(state) HBy1 = state end)
+HBSection:NewSlider("Local Hitbox Z", "", 25, 0, function(state) HBz1 = state end)
+HBSection:NewSlider("Transparency", "", 100, 0, function(s) HBt1 = s/100 end)
 
 local hum = myself.Character.Humanoid
 local run = false
@@ -100,6 +147,6 @@ color changer for hb
 theme changer
 jp slider
 key system w/ userids
-ver 1.01
+ver 1.02
 					
 ]]
