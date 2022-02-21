@@ -223,7 +223,6 @@ KeyButton.MouseButton1Click:connect(function()
     local vault = SHA256(ip .. " + " .. game.Players.LocalPlayer.UserId .. " equinox_sec")
     TextBox.Text = vault
     
-    -- EDIT THIS COPY FUNCTION TO THE ONE YOUR EXPLOIT USES!
     Synapse:Copy(game.Players.LocalPlayer.PlayerGui.Chat.Hasher.TextBox.Text)
     
     print("Key copied to clipboard!")
